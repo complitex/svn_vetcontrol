@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"  xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd">
+<head>
+    <wicket:head><title wicket:id="title"></title></wicket:head>
+</head>
+
+<body>
+<wicket:extend>
+
+    <div>
+        <h1 wicket:id="header"></h1>
+
+        <div id="messages" wicket:id="messages"></div>
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("form input, form select").live('keypress', function (e) {
+                    if ($(this).parents('form').find('button[type=submit].default, input[type=submit].default').length <= 0)
+                        return true;
+                    if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
+                        $(this).parents('form').find('button[type=submit].default, input[type=submit].default').click();
+                        return false;
+                    } else {
+                        return true;
+                    }
+                });
+            });
+        </script>
+
+        <form id="filter_form" action="#" wicket:id="filter_form">
+            <table  border="0" cellspacing="0" cellpadding="0" class="tbColor table_input">
+                <thead>
+                <tr>
+                    <th class="center" wicket:id="order_id"><wicket:message key="document.cargo.id"/></th>
+                    <th class="center" wicket:id="order_movementType"><wicket:message key="document.cargo.movement_type"/></th>
+                    <th class="center" wicket:id="order_vehicleType"><wicket:message key="document.cargo.vehicle_type"/></th>
+                    <th class="center" wicket:id="order_vehicleDetails"><wicket:message key="document.cargo.vehicle_details"/></th>
+                    <th class="center" wicket:id="order_cargoSender"><wicket:message key="document.cargo.cargo_sender"/></th>
+                    <th class="center" wicket:id="order_cargoReceiver"><wicket:message key="document.cargo.cargo_receiver"/></th>
+                    <th class="center" wicket:id="order_cargoProducer"><wicket:message key="document.cargo.cargo_producer"/></th>
+                    <th class="center" wicket:id="order_created"><wicket:message key="document.cargo.date_created"/></th>
+                    <th class="center">
+                        <input class="btnSmall"  wicket:id="filter_reset" type="submit" wicket:message="value:document.cargo.filter.clear"/>
+                    </th>
+                </tr>
+                <tr>
+                    <th class="center"><input type="text" wicket:id="id"/></th>
+                    <th class="center"><select wicket:id="movementType"></select></th>
+                    <th class="center"><select wicket:id="vehicleType"></select></th>
+                    <th class="center"><input type="text" wicket:id="vehicleDetails"/></th>
+                    <th class="center"><input type="text" wicket:id="cargoSenderName"/></th>
+                    <th class="center"><input type="text" wicket:id="cargoReceiverName"/></th>
+                    <th class="center"><input type="text" wicket:id="cargoProducerName"/></th>
+                    <th class="center">
+                        <div style="width:102px">
+                            <input style="width:80px" type="text" wicket:id="created"/>
+                        </div>
+                    </th>
+                    <th class="center">
+                        <input class="btnSmall default" type="submit" wicket:message="value:document.cargo.filter.go" tabindex="0" />
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr wicket:id="documents">
+                    <td><span wicket:id="id"></span></td>
+                    <td><span wicket:id="movementType"></span></td>
+                    <td><span wicket:id="vehicleType"></span></td>
+                    <td><span wicket:id="vehicleDetails"></span></td>
+                    <td><span wicket:id="cargoSender"></span></td>
+                    <td><span wicket:id="cargoReceiver"></span></td>
+                    <td><span wicket:id="cargoProducer"></span></td>
+                    <td><span wicket:id="created"></span></td>
+                    <td><span wicket:id="action"></span></td>
+                </tr>
+                </tbody>
+            </table>
+
+            <div>
+                <span wicket:id="navigator">[dataview navigator]</span>
+            </div>
+        </form>
+    </div>
+
+</wicket:extend>
+</body>
+</html>

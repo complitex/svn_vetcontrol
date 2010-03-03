@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    <context-param>
+        <param-name>configuration</param-name>
+        <param-value>development</param-value>
+    </context-param>
+    
+    <env-entry>
+        <env-entry-name>syncServerUrl</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>http://localhost:8080/server/sync</env-entry-value>
+    </env-entry>
+
+    <filter>
+        <filter-name>wicket</filter-name>
+        <filter-class>org.apache.wicket.protocol.http.WicketFilter</filter-class>
+        <init-param>
+            <param-name>applicationClassName</param-name>
+            <param-value>org.vetcontrol.web.VetcontrolWebApplication</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>wicket</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <servlet>
+        <servlet-name>sync</servlet-name>
+        <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+      <!--  <init-param>
+              <param-name>com.sun.jersey.config.property.packages</param-name>
+              <param-value>org.vetcontrol.sync.server.resources;org.vetcontrol.sync</param-value>
+         </init-param>-->
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>sync</servlet-name>
+        <url-pattern>/sync/*</url-pattern>
+    </servlet-mapping>
+
+    <security-role>
+        <role-name>AUTHORIZED</role-name>
+    </security-role>
+    <security-role>
+        <role-name>USER_EDIT</role-name>
+    </security-role>
+    <security-role>
+        <role-name>INFORMATION_EDIT</role-name>
+    </security-role>
+    <security-role>
+        <role-name>INFORMATION_VIEW</role-name>
+    </security-role>
+    <security-role>
+        <role-name>DOCUMENT_CREATE</role-name>
+    </security-role>
+    <security-role>
+        <role-name>DOCUMENT_EDIT</role-name>
+    </security-role>
+    <security-role>
+        <role-name>DOCUMENT_DEP_VIEW</role-name>
+    </security-role>
+    <security-role>
+        <role-name>DOCUMENT_DEP_EDIT</role-name>
+    </security-role>
+    <security-role>
+        <role-name>DOCUMENT_DEP_CHILD_VIEW</role-name>
+    </security-role>
+    <security-role>
+        <role-name>DOCUMENT_DEP_CHILD_EDIT</role-name>
+    </security-role>
+    <security-role>
+        <role-name>LOGGING_VIEW</role-name>
+    </security-role>
+    <security-role>
+        <role-name>LOCAL_REPORT</role-name>
+    </security-role>
+    <security-role>
+        <role-name>LOCAL_AND_REGIONAL_REPORT</role-name>
+    </security-role>
+    <security-role>
+        <role-name>REGIONAL_REPORT</role-name>
+    </security-role>
+
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>VetcontrolRealm</realm-name>
+        <form-login-config>
+            <form-login-page>/login.jsp</form-login-page>
+            <form-error-page>/login_error.jsp</form-error-page>
+        </form-login-config>
+    </login-config>
+
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
+</web-app>

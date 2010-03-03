@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"  xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd">
+<head>
+    <wicket:head><title wicket:id="title"></title></wicket:head>
+</head>
+
+<body>
+<wicket:extend>
+    <h1><wicket:message key="user.list.title"/></h1>
+
+    <div id="messages" wicket:id="messages"></div>
+
+    <div id="user_list_filter">
+        <form action="#" wicket:id="filter_form">
+            <input type="text" wicket:id="filter_value"/>
+            <input class="btnSmall" type="submit" wicket:message="value:user.list.filter"/>
+        </form>
+    </div>
+    <div>
+        <table  border="0" cellspacing="0" cellpadding="0" class="tbColor">
+            <thead>
+            <tr>
+                <th class="center" wicket:id="order_last_name"><wicket:message key="user.last_name"/></th>
+                <th class="center" wicket:id="order_first_name"><wicket:message key="user.first_name"/></th>
+                <th class="center" wicket:id="order_middle_name"><wicket:message key="user.middle_name"/></th>
+                <th class="center" wicket:id="order_job"><wicket:message key="user.job"/></th>
+                <th class="center" wicket:id="order_department"><wicket:message key="user.department"/></th>
+                <th class="center" wicket:id="order_login"><wicket:message key="user.login"/></th>
+                <th class="center"><wicket:message key="user.usergroup"/></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr wicket:id="users">
+                <td><span wicket:id="last_name"></span></td>
+                <td><span wicket:id="first_name"></span></td>
+                <td><span wicket:id="middle_name"></span></td>
+                <td><span wicket:id="job"></span></td>
+                <td><span wicket:id="department"></span></td>
+                <td><a href="#" wicket:id="edit"><span wicket:id="login"></span></a></td>
+                <td><span wicket:id="groups"></span></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div>
+            <span wicket:id="navigator">[dataview navigator]</span>
+        </div>
+    </div>
+
+</wicket:extend>
+</body>
+</html>
