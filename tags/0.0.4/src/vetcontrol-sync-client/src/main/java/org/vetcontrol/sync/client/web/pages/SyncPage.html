@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"  xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd">
+<head>
+    <wicket:head><title wicket:id="title"></title></wicket:head>
+</head>
+
+<body>
+<wicket:extend>
+    <h1><wicket:message key="sync.client.sync_page.title"/></h1>
+
+    <div id="messages" wicket:id="messages"></div>
+
+    <div style="margin: 10px">
+        <span style="font-weight:bold;"><wicket:message key="sync.client.last_sync"/>: </span>
+        <span wicket:id="lastSync"></span>
+    </div>
+
+    <div wicket:id="container" style="height:400px; overflow-y:auto;">
+        <table  border="0" cellspacing="0" cellpadding="0" class="tbColor">
+            <thead>
+            <tr>
+                <th width="150px" style="text-align:center;"><wicket:message key="sync.client.time"/></th>
+                <th style="text-align:center;"><wicket:message key="sync.client.object"/></th>
+                <th style="text-align:center;"><wicket:message key="sync.client.message"/></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr wicket:id="list">
+                <td wicket:id="date" style="text-align:center;"></td>
+                <td wicket:id="name"></td>
+                <td wicket:id="message" style="text-align:center;"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <form action="#" wicket:id="form">
+        <div align="center">
+            <input type="submit" class="btnBig" wicket:message="value:sync.client.process" wicket:id="submit"/>            
+        </div>
+    </form>
+
+</wicket:extend>
+</body>
+</html>
