@@ -1,0 +1,227 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <artifactId>vetcontrol</artifactId>
+        <groupId>org.vetcontrol</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>vetcontrol-web</artifactId>
+
+    <packaging>war</packaging>
+    <name>Vetcontrol Java EE 6 Webapp</name>
+
+    <profiles>
+        <profile>
+            <id>server</id>
+
+            <properties>
+                <jta-data-source>jdbc/vetcontroldb</jta-data-source>
+                <context-root>/server</context-root>
+            </properties>
+
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+
+            <dependencies>
+                <dependency>
+                    <groupId>org.vetcontrol</groupId>
+                    <artifactId>vetcontrol-user</artifactId>
+                </dependency>
+                <dependency>
+                    <groupId>org.vetcontrol</groupId>
+                    <artifactId>vetcontrol-sync-server</artifactId>
+                </dependency>
+            </dependencies>
+
+            <build>
+                <finalName>vetcontrol-server</finalName>
+            </build>
+        </profile>
+
+        <profile>
+            <id>client</id>
+
+            <properties>
+                <jta-data-source>jdbc/vetcontrol_clientdb</jta-data-source>
+                <context-root>/client</context-root>
+            </properties>
+
+            <dependencies>
+                <dependency>
+                    <groupId>org.vetcontrol</groupId>
+                    <artifactId>vetcontrol-sync-client</artifactId>
+                </dependency>
+            </dependencies>
+
+            <build>
+                <finalName>vetcontrol-client</finalName>
+            </build>
+        </profile>
+    </profiles>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.vetcontrol</groupId>
+            <artifactId>vetcontrol-configuration</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.vetcontrol</groupId>
+            <artifactId>vetcontrol-resources-images</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.vetcontrol</groupId>
+            <artifactId>vetcontrol-resources-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.vetcontrol</groupId>
+            <artifactId>vetcontrol-commons</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.vetcontrol</groupId>
+            <artifactId>vetcontrol-document</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.vetcontrol</groupId>
+            <artifactId>vetcontrol-information</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.vetcontrol</groupId>
+            <artifactId>vetcontrol-logging</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.vetcontrol</groupId>
+            <artifactId>vetcontrol-report-commons</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.vetcontrol</groupId>
+            <artifactId>vetcontrol-report</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.wicket</groupId>
+            <artifactId>wicket</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.wicket</groupId>
+            <artifactId>wicket-auth-roles</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.wicket</groupId>
+            <artifactId>wicket-ioc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.wicket</groupId>
+            <artifactId>wicket-extensions</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.wicket</groupId>
+            <artifactId>wicket-datetime</artifactId>
+        </dependency>
+
+        <!-- slf4j logging -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.wiquery</groupId>
+            <artifactId>wiquery</artifactId>
+            <scope>system</scope>
+            <version>1.1</version>
+            <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/wiquery-1.0.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.wicketstuff</groupId>
+            <artifactId>wicket-contrib-javaee</artifactId>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/wicket-contrib-javaee-1.1.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>jasperreports</groupId>
+            <artifactId>jasperreports</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>jfree</groupId>
+                    <artifactId>jcommon</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>jfree</groupId>
+                    <artifactId>jfreechart</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>eclipse</groupId>
+                    <artifactId>jdtcore</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>bouncycastle</groupId>
+                    <artifactId>bcmail-jdk14</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.bouncycastle</groupId>
+                    <artifactId>bcmail-jdk14</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>bouncycastle</groupId>
+                    <artifactId>bcprov-jdk14</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.bouncycastle</groupId>
+                    <artifactId>bcprov-jdk14</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>bouncycastle</groupId>
+                    <artifactId>bctsp-jdk14</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.1-beta-1</version>
+                <configuration>
+                    <webResources>
+                        <resource>
+                            <directory>${project.basedir}\src\main\resources</directory>
+                            <targetPath>WEB-INF\classes</targetPath>
+                            <filtering>true</filtering>
+                        </resource>
+                        <resource>
+                            <directory>${project.basedir}\src\main\webapp</directory>
+                            <includes>
+                                <include>**/*.xml</include>
+                            </includes>
+                            <targetPath>\</targetPath>
+                            <filtering>true</filtering>
+                        </resource>
+                        <resource>
+                            <directory>${project.basedir}\src\main\webapp</directory>
+                            <excludes>
+                                <exclude>**/*.xml</exclude>
+                            </excludes>
+                            <targetPath>\</targetPath>
+                        </resource>
+                    </webResources>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+

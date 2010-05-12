@@ -1,0 +1,31 @@
+/* 
+    Document   : SaveUpdateConfirmationDialog
+    Created on : Mar 1, 2010, 3:48:31 PM
+    Author     : Artem
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+.confirm_dialog_update{
+    width:156px !important;
+}
+
+.confirm_dialog_createNew{
+    width:210px !important;
+}
+
+.ui-dialog{
+    background:#C4CDD4 url(images/formFrame-t.gif) repeat-x scroll 0 0 !important;
+    padding: 0px 0px 0px 0px !important;
+}
+
+.ui-corner-all { 
+    -moz-border-radius: 0px !important;
+    -webkit-border-radius: 0px !important;
+}
+

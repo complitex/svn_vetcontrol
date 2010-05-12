@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:wicket="http://wicket.apache.org">
+    <head>
+        <wicket:head><title wicket:id="title"></title></wicket:head>
+    </head>
+    <body>
+        <wicket:extend>
+            <center>
+                <h1>
+                    <wicket:message key="report.name.header"/>
+                    <br/>
+                    <span wicket:id="report.name"></span>
+                </h1>
+            </center>
+            <table class="tbColor" border="0" cellpadding="0" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th rowspan="2" valign="top" class="center">
+                            <wicket:message key="report.header.number"/>
+                        </th>
+                        <th>
+                        </th>
+                        <th colspan="4" class="center">
+                            <span wicket:id="report.header.all"></span>
+                        </th>
+                        <th colspan="4" class="center">
+                            <span wicket:id="report.header.inCurrentMonth"></span>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th class="center" valign="top">
+                            <span wicket:id="report.header.cargoMode">
+                                <wicket:message key="report.header.cargoMode"/>
+                            </span>
+                        </th>
+                        <th class="center" valign="top">
+                            <wicket:message key="report.header.export"/>
+                        </th>
+                        <th class="center" valign="top">
+                            <wicket:message key="report.header.import"/>
+                        </th>
+                        <th class="center" valign="top">
+                            <wicket:message key="report.header.transit"/>
+                        </th>
+                        <th class="center" valign="top">
+                            <wicket:message key="report.header.importTransit"/>
+                        </th>
+                        <th class="center" valign="top">
+                            <wicket:message key="report.header.export"/>
+                        </th>
+                        <th class="center" valign="top">
+                            <wicket:message key="report.header.import"/>
+                        </th>
+                        <th class="center" valign="top">
+                            <wicket:message key="report.header.transit"/>
+                        </th>
+                        <th class="center" valign="top">
+                            <wicket:message key="report.header.importTransit"/>
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr wicket:id="list">
+                        <td>
+                            <span wicket:id="rowNumber"></span>
+                        </td>
+                        <td>
+                            <span wicket:id="cargoModeName"></span>
+                        </td>
+                        <td class="center">
+                            <span wicket:id="export"></span>
+                        </td>
+                        <td class="center">
+                            <span wicket:id="import"></span>
+                        </td>
+                        <td class="center">
+                            <span wicket:id="transit"></span>
+                        </td>
+                        <td class="center">
+                            <span wicket:id="importTransit"></span>
+                        </td>
+
+                        <td class="center">
+                            <span wicket:id="exportInCurrentMonth"></span>
+                        </td>
+                        <td class="center">
+                            <span wicket:id="importInCurrentMonth"></span>
+                        </td>
+                        <td class="center">
+                            <span wicket:id="transitInCurrentMonth"></span>
+                        </td>
+                        <td class="center">
+                            <span wicket:id="importTransitInCurrentMonth"></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div>
+                <span wicket:id="navigator"></span>
+            </div>
+
+            <div>
+                <br/>
+                <br/>
+                <div>
+                    <wicket:link>
+                        <a href="MovementTypesReportForm.html">
+                            <wicket:message key="report.backToSetParams"/>
+                        </a>
+                    </wicket:link>
+                </div>
+                <div>
+                    <form id="pdfForm" target="_blank" method="post" action="MovementTypesReportServlet">
+                        <input type="hidden" value="pdf" name="ExportType"/>
+                        <input wicket:id="pdfMonth" type="hidden"/>
+                        <input wicket:id="pdfDepartment" type="hidden"/>
+                    </form>
+                </div>
+                <div>
+                    <form id="textForm" target="_blank" method="post" action="MovementTypesReportServlet">
+                        <input type="hidden" value="text" name="ExportType"/>
+                        <input wicket:id="textMonth" type="hidden"/>
+                        <input wicket:id="textDepartment" type="hidden"/>
+                    </form>
+                </div>
+            </div>
+
+        </wicket:extend>
+    </body>
+</html>

@@ -1,0 +1,52 @@
+package org.vetcontrol.sync.client.service;
+
+import org.vetcontrol.entity.Client;
+import org.vetcontrol.entity.Department;
+import org.vetcontrol.entity.Synchronized;
+import org.vetcontrol.util.DateUtil;
+
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import java.util.List;
+
+import static org.vetcontrol.sync.client.service.ClientFactory.createJSONClient;
+
+/**
+ * @author Anatoly A. Ivanov java@inheaven.ru
+ *         Date: 05.02.2010 16:09:37
+ */
+@Stateless(name = "RegistrationBean")
+public class RegistrationBean {
+    @PersistenceContext
+    private EntityManager em;
+
+    @EJB(beanName = "UserSyncBean")
+    UserSyncBean userSyncBean;
+
+    public Client processRegistration(Client client){
+        client =  createJSONClient("/registration").post(Client.class, client);
+
+        em.createQuery("delete from Client c where c.mac = :mac")
+                .setParameter("mac", client.getMac())
+                .executeUpdate();
+
+        client.setSyncStatus(Synchronized.SyncStatus.SYNCHRONIZED);
+        client.setUpdated(DateUtil.getCurrentDate());
+        client.setVersion("1.0.0");
+
+        client.getInsertQuery(em).executeUpdate();
+
+        userSyncBean.processTxRequied();
+
+        //commit
+        createJSONClient("/registration/commit").put(client.getSecureKey());
+
+        return client;
+    }
+
+    public List<Department> getDepartments(){
+        return em.createQuery("select d from Department d", Department.class).getResultList();
+    }
+}

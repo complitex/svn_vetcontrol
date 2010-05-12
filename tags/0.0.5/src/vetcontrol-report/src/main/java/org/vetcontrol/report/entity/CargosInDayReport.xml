@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM 'http://java.sun.com/dtd/properties.dtd'>
+<properties>
+    <entry key="all">
+        <![CDATA[
+            SELECT
+                    (SELECT sc.value FROM stringculture sc WHERE sc.id =
+                            (SELECT ct.name FROM cargo_type ct WHERE ct.id = c.cargo_type_id)
+                            AND sc.locale= :locale) AS cargoTypeName,
+                    (SELECT d.cargo_sender_name) AS cargoSenderName,
+                    (SELECT sc.value FROM stringculture sc WHERE sc.id=
+                        (SELECT c.name FROM countrybook c WHERE c.id = d.cargo_sender_country_id)
+                        AND sc.locale = :locale) AS cargoSenderCountry,
+                    (SELECT d.cargo_receiver_name) AS cargoReceiverName,
+                    (SELECT d.cargo_receiver_address) AS cargoReceiverAddress,
+                    (SELECT sc.value FROM stringculture sc WHERE sc.id =
+                            (SELECT cp.name FROM cargo_producer cp WHERE cp.id = c.cargo_producer_id)
+                            AND sc.locale= :locale) AS cargoProducerName,
+                    (SELECT d.vehicle_type) AS vehicleType,
+                    (SELECT IFNULL(c.`count`, 0)) AS `count`,
+                    (SELECT sc.value FROM stringculture sc WHERE sc.id =
+                            (SELECT ut.short_name FROM unit_type ut WHERE ut.id = c.unit_type_id)
+                            AND sc.locale= :locale) AS unitTypeName
+
+            FROM cargo c
+            JOIN document_cargo d ON (c.document_cargo_id = d.id AND c.client_id = d.client_id AND c.department_id = d.department_id)
+            WHERE d.department_id = :department AND d.created >= :startDate AND d.created <= :endDate
+            ORDER BY {0} {1}
+        ]]>
+    </entry>
+    <entry key="size">
+        <![CDATA[
+            SELECT COUNT(*)
+            FROM cargo c
+            JOIN document_cargo d ON (c.document_cargo_id = d.id AND c.client_id = d.client_id AND c.department_id = d.department_id)
+            WHERE d.department_id = :department AND d.created >= :startDate AND d.created <= :endDate
+        ]]>
+    </entry>
+</properties>
